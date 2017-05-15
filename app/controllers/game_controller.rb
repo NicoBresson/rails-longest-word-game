@@ -3,9 +3,15 @@ require 'json'
 require 'date'
 
 class GameController < ApplicationController
+  def initialize
+    session[:user]={tentative: 0}
+  end
+
   def game
     @grid = generate_grid(10)
     @start_time = Time.now
+    @session = session[:user]
+    @tentative = session[:tentative] + 1
   end
 
   def score
